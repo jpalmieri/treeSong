@@ -3,7 +3,7 @@ const rootsSketch = p => {
 
   let roots = [];
 
-   p.setup = function() {
+  function init() {
     const { containerWidth, containerHeight} = getContainerDimensions();
     const canvas = p.createCanvas(containerWidth, containerHeight);
     canvas.parent(containerId);
@@ -11,6 +11,10 @@ const rootsSketch = p => {
     p.background(255);
   
     roots.push(new Root({ x: p.width / 2, y: 0 }));
+  }
+
+  p.setup = function() {
+    init();
   }
   
   class Root {
@@ -56,6 +60,12 @@ const rootsSketch = p => {
   }
   
   p.draw = function() {
+    if (restart) {
+      roots = [];
+      restart = false;
+      init();
+    };
+
     if (rootsAnimating) {
       roots.forEach(root => {
         root.step();

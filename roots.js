@@ -56,10 +56,12 @@ const rootsSketch = p => {
   }
   
   p.draw = function() {
-    roots.forEach(root => {
-      root.step();
-      root.display();
-    })
+    if (rootsAnimating) {
+      roots.forEach(root => {
+        root.step();
+        root.display();
+      })
+    }
   }
   
   // This Redraws the Canvas when resized

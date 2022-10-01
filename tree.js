@@ -36,9 +36,7 @@ function draw() {
        plantX + 25, plantY + 55,
        plantX - 25, plantY + 55);
 
-   fill(0, 0, 0);
-    noStroke();
-    ellipse(200,290,20,30);
+   
 }
 
 function mousePressed() {

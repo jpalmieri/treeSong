@@ -11,7 +11,6 @@ const treeSketch = p => {
   let plantY;
 
   p.setup = function() {
-    // createCanvas(400, 400);
     const { containerWidth, containerHeight} = getContainerDimensions();
     const canvas = p.createCanvas(containerWidth, containerHeight);
     canvas.parent(treeId);
@@ -21,7 +20,6 @@ const treeSketch = p => {
     plant = new Node(null, 50, p.random(200, 255), p.TAU * 0.75);
     p.strokeWeight(0);
     circleColor = p.random(255);
-
   }
 
   p.draw = function() {

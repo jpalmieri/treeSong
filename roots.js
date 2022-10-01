@@ -9,7 +9,7 @@ function setup() {
 
   background(255);
 
-  roots.push(new Root({ x: width / 2, y: height / 2 }));
+  roots.push(new Root({ x: width / 2, y: 0 }));
 }
 
 class Root {
@@ -23,8 +23,8 @@ class Root {
   direction;
 
   constructor({ x, y, direction = {
-    x: -1,
-    y: -1
+    x: 1,
+    y: 1
   } }) {
     this.x = x;
     this.y = y;
@@ -34,7 +34,7 @@ class Root {
   step() {
     if (this.stepsTaken == this.length / 2) {
       console.log("new ROot")
-      const direction = { x: this.direction.x, y: -this.direction.y };
+      const direction = { x: -this.direction.x, y: this.direction.y };
       const newRoot = new Root({ direction, x: this.x, y: this.y });
       roots.push(newRoot);
     }

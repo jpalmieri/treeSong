@@ -14,7 +14,7 @@ const treeSketch = p => {
     const { containerWidth, containerHeight} = getContainerDimensions();
     const canvas = p.createCanvas(containerWidth, containerHeight);
     canvas.parent(treeId);
-    p.frameRate(5);
+    p.frameRate(7);
 
     plantX = p.width / 2;
     plantY = p.height * .9;

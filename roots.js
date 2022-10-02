@@ -10,7 +10,7 @@ const rootsSketch = p => {
   
     p.background(255);
   
-    roots.push(new Root({ x: p.width / 2, y: 0 }));
+    roots.push(new Root({ x: p.width / 2, y: 0, direction: { x: -1, y: 1 } }));
   }
 
   p.setup = function() {
@@ -26,22 +26,26 @@ const rootsSketch = p => {
     stepsTaken = 0;
   
     direction;
+
+    babies = 0;
   
-    constructor({ x, y, direction = {
-      x: 1,
-      y: 1
-    } }) {
+    constructor({ x, y, direction }) {
       this.x = x;
       this.y = y;
-      this.direction = direction;
+      this.direction = direction ? direction : { x: Math.random(1), y: Math.random(1) };
     }
   
     step() {
-      if (this.stepsTaken == this.length / 2) {
-        console.log("new ROot")
-        const direction = { x: -this.direction.x, y: this.direction.y };
-        const newRoot = new Root({ direction, x: this.x, y: this.y });
+      if (this.stepsTaken >= this.length * 0.33333 && this.babies == 0) {
+        const newRoot = new Root({ x: this.x, y: this.y });
         roots.push(newRoot);
+        this.babies++;
+      }
+
+      if (this.stepsTaken >= this.length * 0.66666 && this.babies == 1) {
+        const newRoot = new Root({ x: this.x, y: this.y });
+        roots.push(newRoot);
+        this.babies++
       }
   
       if (this.stepsTaken < this.length) {

@@ -31,13 +31,15 @@ const rootsSketch = p => {
   
     step() {
       if (this.stepsTaken >= this.length * 0.33333 && this.babies == 0) {
-        const newRoot = new Root({ location: p.createVector(this.location.x, this.location.y) });
+        const location = p.createVector(this.location.x, this.location.y);
+        const newRoot = new Root({ location });
         roots.push(newRoot);
         this.babies++;
       }
 
       if (this.stepsTaken >= this.length * 0.66666 && this.babies == 1) {
-        const newRoot = new Root({ location: p.createVector(this.location.x, this.location.y) });
+        const location = p.createVector(this.location.x, this.location.y);
+        const newRoot = new Root({ location });
         roots.push(newRoot);
         this.babies++
       }

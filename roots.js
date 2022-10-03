@@ -28,11 +28,12 @@ const rootsSketch = p => {
     stepsTaken = 0;
 
     babies = 0;
+    topSpeed = 1;
   
     constructor({ location, velocity }) {
       this.location = location;
-      const goLeft = Math.random(1) > 0.5 ? true : false;
-      this.velocity = velocity ? velocity : p.createVector(goLeft ? -Math.random(1) : Math.random(1), Math.random(0.15));
+      this.goLeft = Math.random(1) > 0.5 ? true : false;
+      this.velocity = velocity ? velocity : p.createVector(this.goLeft ? -Math.random(1) : Math.random(1), Math.random(0.15));
     }
   
     step() {
@@ -52,8 +53,12 @@ const rootsSketch = p => {
   
       if ((Math.round(Math.random() * 100) % 3) === 0) {
         if (this.stepsTaken < this.length) {
-          this.location.x += this.velocity.x;
-          this.location.y += this.velocity.y;
+          const acceleration = p5.Vector.random2D();
+          acceleration.mult(p.random(0.15));
+          this.velocity.x += acceleration.x;
+          this.velocity.y += acceleration.y;
+          this.velocity.limit(this.topspeed)
+          this.location.add(this.velocity);
           this.stepsTaken++;
         }
       }

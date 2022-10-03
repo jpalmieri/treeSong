@@ -26,7 +26,8 @@ const rootsSketch = p => {
   
     constructor({ location, velocity }) {
       this.location = location;
-      this.velocity = velocity ? velocity : p.createVector(Math.random(1), Math.random(1));
+      const goLeft = Math.random(1) > 0.5 ? true : false;
+      this.velocity = velocity ? velocity : p.createVector(goLeft ? -Math.random(1) : Math.random(1), Math.random(1));
     }
   
     step() {

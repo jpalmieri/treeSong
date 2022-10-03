@@ -10,7 +10,7 @@ const rootsSketch = p => {
   
     p.background(255);
   
-    roots.push(new Root({ location: p.createVector(p.width / 2, 0), direction: p.createVector(0, 1) }));
+    roots.push(new Root({ location: p.createVector(p.width / 2, 0), velocity: p.createVector(0, 1) }));
   }
 
   p.setup = function() {
@@ -24,9 +24,9 @@ const rootsSketch = p => {
 
     babies = 0;
   
-    constructor({ location, direction }) {
+    constructor({ location, velocity }) {
       this.location = location;
-      this.direction = direction ? direction : p.createVector(Math.random(1), Math.random(1));
+      this.velocity = velocity ? velocity : p.createVector(Math.random(1), Math.random(1));
     }
   
     step() {
@@ -43,8 +43,8 @@ const rootsSketch = p => {
       }
   
       if (this.stepsTaken < this.length) {
-        this.location.x += this.direction.x;
-        this.location.y += this.direction.y;
+        this.location.x += this.velocity.x;
+        this.location.y += this.velocity.y;
         this.stepsTaken++;
       }
   

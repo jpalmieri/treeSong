@@ -10,7 +10,12 @@ const rootsSketch = p => {
   
     p.background(255);
   
-    roots.push(new Root({ location: p.createVector(p.width / 2, 0), velocity: p.createVector(0, 1) }));
+  
+    roots.push(new Root({ location: p.createVector(p.width / 2, 0), velocity: p.createVector(-0.50, 0.15) }));
+    roots.push(new Root({ location: p.createVector(p.width / 2, 0), velocity: p.createVector(-0.25, 0.15) }));
+    roots.push(new Root({ location: p.createVector(p.width / 2, 0), velocity: p.createVector(0, 0.15) }));
+    roots.push(new Root({ location: p.createVector(p.width / 2, 0), velocity: p.createVector(0.25, 0.15) }));
+    roots.push(new Root({ location: p.createVector(p.width / 2, 0), velocity: p.createVector(0.50, 0.15) }));
   }
 
   p.setup = function() {
@@ -27,7 +32,7 @@ const rootsSketch = p => {
     constructor({ location, velocity }) {
       this.location = location;
       const goLeft = Math.random(1) > 0.5 ? true : false;
-      this.velocity = velocity ? velocity : p.createVector(goLeft ? -Math.random(1) : Math.random(1), Math.random(1));
+      this.velocity = velocity ? velocity : p.createVector(goLeft ? -Math.random(1) : Math.random(1), Math.random(0.15));
     }
   
     step() {
@@ -45,13 +50,13 @@ const rootsSketch = p => {
         this.babies++
       }
   
-      if (this.stepsTaken < this.length) {
-        this.location.x += this.velocity.x;
-        this.location.y += this.velocity.y;
-        this.stepsTaken++;
+      if ((Math.round(Math.random() * 100) % 3) === 0) {
+        if (this.stepsTaken < this.length) {
+          this.location.x += this.velocity.x;
+          this.location.y += this.velocity.y;
+          this.stepsTaken++;
+        }
       }
-  
-      
     }
   
     display() {
@@ -67,7 +72,7 @@ const rootsSketch = p => {
       init();
     };
 
-    if (rootsAnimating) {
+    if (rootsAnimating && roots.length <= 1000) {
       roots.forEach(root => {
         root.step();
         root.display();

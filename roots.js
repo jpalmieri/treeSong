@@ -10,7 +10,7 @@ const rootsSketch = p => {
   
     p.background(255);
   
-    roots.push(new Root({ x: p.width / 2, y: 0, direction: { x: -1, y: 1 } }));
+    roots.push(new Root({ location: p.createVector(p.width / 2, 0), direction: p.createVector(0, 1) }));
   }
 
   p.setup = function() {
@@ -18,39 +18,33 @@ const rootsSketch = p => {
   }
   
   class Root {
-    x;
-    y;
-  
     length = 200;
   
     stepsTaken = 0;
-  
-    direction;
 
     babies = 0;
   
-    constructor({ x, y, direction }) {
-      this.x = x;
-      this.y = y;
-      this.direction = direction ? direction : { x: Math.random(1), y: Math.random(1) };
+    constructor({ location, direction }) {
+      this.location = location;
+      this.direction = direction ? direction : p.createVector(Math.random(1), Math.random(1));
     }
   
     step() {
       if (this.stepsTaken >= this.length * 0.33333 && this.babies == 0) {
-        const newRoot = new Root({ x: this.x, y: this.y });
+        const newRoot = new Root({ location: p.createVector(this.location.x, this.location.y) });
         roots.push(newRoot);
         this.babies++;
       }
 
       if (this.stepsTaken >= this.length * 0.66666 && this.babies == 1) {
-        const newRoot = new Root({ x: this.x, y: this.y });
+        const newRoot = new Root({ location: p.createVector(this.location.x, this.location.y) });
         roots.push(newRoot);
         this.babies++
       }
   
       if (this.stepsTaken < this.length) {
-        this.x += this.direction.x;
-        this.y += this.direction.y;
+        this.location.x += this.direction.x;
+        this.location.y += this.direction.y;
         this.stepsTaken++;
       }
   
@@ -59,7 +53,7 @@ const rootsSketch = p => {
   
     display() {
       p.stroke(0);
-      p.point(this.x,this.y);
+      p.point(this.location.x,this.location.y);
     }
   }
   
